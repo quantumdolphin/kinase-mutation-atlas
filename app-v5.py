@@ -19,7 +19,7 @@ def load_variant_data():
     return variant_data[['Legacy Mutation ID', 'gene_name', 'resno', 'org_res', 'mut_res', 'Count']]
 
 # Function to find nearby residues
-def find_nearby_residues(data, residue_position_id, distance_cutoff=5.0):
+def find_nearby_residues(data, residue_position_id, distance_cutoff=3.0):
     target_residue = data[data['residue_position_id'] == residue_position_id]
     if target_residue.empty:
         return pd.DataFrame()  # Return empty DataFrame if residue not found
@@ -28,14 +28,14 @@ def find_nearby_residues(data, residue_position_id, distance_cutoff=5.0):
     data['Distance'] = np.linalg.norm(data[['x', 'y', 'z']].values - target_coords, axis=1)
 
     nearby = data[(data['Distance'] <= distance_cutoff) & (data['residue_position_id'] != residue_position_id)]
-    return nearby[['gene_name', 'resno_y', 'org_res', 'Distance']]
+    return nearby[['gene_name', 'resno_y', 'org_res', 'Distance','Count','cluster_labels']].sort_values(by='Distance')
 
 # Load data
 main_data = load_main_data()
 variant_data = load_variant_data()
 
 # Title
-st.title("Jacobson lab UCSF :Kinase Mutation Explorer")
+st.title("Jacobson Lab UCSF :Kinase Mutation Explorer")
 
 #st.title("Jacobson lab UCSF :Kinase Atlas")  # Large title
 #st.header("Introduction")            # Medium header
@@ -59,7 +59,7 @@ st.subheader("Mutation Details")
 st.write(filtered_data)
 
 # Section 2: Find Nearby Residues
-st.header("Find Nearby Residues")
+st.header("Find Nearby Residue Positions with Mutations")
 nearby_residue_id = main_data[(main_data['gene_name'] == selected_kinase) & (main_data['resno_y'] == selected_residue)]['residue_position_id'].values[0]
 nearby_results = find_nearby_residues(main_data, nearby_residue_id)
 st.subheader("Nearby Residues")
