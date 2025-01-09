@@ -2,7 +2,8 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 # group photo
-st.image("group-photo.jpeg", caption="Jacobson Lab - UCSF", use_column_width=True)
+st.image("group_photo.jpeg", caption="Jacobson Lab - UCSF", use_container_width=True)
+
 
 # Load the primary dataset
 @st.cache_data
