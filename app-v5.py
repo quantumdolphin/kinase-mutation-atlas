@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 # group photo
 st.image("group-photo.jpeg", use_container_width=True)
-#st.header("Jacobson lab UCSF")            # Medium header
+st.header("Jacobson lab UCSF")            # Medium header
 
 # Load the primary dataset
 @st.cache_data
@@ -39,7 +39,7 @@ variant_data = load_variant_data()
 
 # Title
 st.title("Graphic Abstract:")
-st.image("graphic_abstract-3.png", caption="Jacobson Lab - UCSF", use_container_width=True)
+st.image("graphic_abstract-3.png", use_container_width=True)
 #st.title("Jacobson lab UCSF :Kinase Atlas")  # Large title
 #st.header("Introduction")            # Medium header
 #st.subheader("Purpose")              # Small header
