@@ -1,9 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-# group photo
-st.image("group-photo.jpeg", use_container_width=True)
-st.header("Jacobson lab UCSF")            # Medium header
+
 
 # Load the primary dataset
 @st.cache_data
@@ -89,3 +87,7 @@ st.download_button(
     file_name="variant_level_data.csv",
     mime="text/csv"
 )
+# group photo
+st.image("group-photo.jpeg", caption="Jacobson Lab reunion -Aug 2023",use_container_width=True)
+
+st.header("References:")  
